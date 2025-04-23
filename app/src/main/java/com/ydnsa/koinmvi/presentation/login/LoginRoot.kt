@@ -1,21 +1,30 @@
 package com.ydnsa.koinmvi.presentation.login
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ydnsa.koinmvi.presentation.login.composables.LoginScreen
+import org.koin.compose.koinInject
+
 
 @Composable
 fun LoginRoot(
-    modifier: Modifier = Modifier,
 ) {
-    Scaffold {paddingValues ->
-        LoginScreen(modifier=modifier.padding(paddingValues))
+    val loginModelView : LoginModelView= koinInject()
+    val loginCoordinator = rememberLoginCoordinator(loginModelView)
 
+    val uiState by loginCoordinator.loginState.collectAsStateWithLifecycle()
+
+    val loginAction:(LoginIntent) -> Unit = { loginIntent ->
+        loginCoordinator.handle(loginIntent)
     }
+
+
+
+        LoginScreen(uiState,loginAction)
+
 }
 
 @Preview(name = "LoginRoot")

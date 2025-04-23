@@ -4,9 +4,18 @@ data class LoginState (
     val isLoading : Boolean = false,
     val isSuccess : Boolean =false,
     val isError : Boolean = false,
+    val password :String ="",
+    val username:String="",
+    val isPasswordVisible: Boolean = false,
+    val errorMessage:String =""
+
 )
 
 sealed class LoginIntent{
-    data class submit(val username: String ,val password : String) : LoginIntent()
+    data object Submit : LoginIntent()
+    data object TooglePasswordVisibility : LoginIntent()
+    data class IsUsernameChanged(val name:String) : LoginIntent()
+    data class IsPasswordChange(val name:String) : LoginIntent()
+
 }
 

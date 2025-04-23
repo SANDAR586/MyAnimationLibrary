@@ -4,7 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.ydnsa.koinmvi.di.appModule
+import com.ydnsa.koinmvi.navigations.AppNavGraph
 import com.ydnsa.koinmvi.presentation.login.LoginRoot
 import org.koin.core.context.startKoin
 
@@ -13,12 +16,15 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+
             startKoin {
                 modules(appModule)
             }
+            val navHostController: NavHostController= rememberNavController()
+            AppNavGraph(navHostController)
         }
-
-
     }
 
 }
+
+
