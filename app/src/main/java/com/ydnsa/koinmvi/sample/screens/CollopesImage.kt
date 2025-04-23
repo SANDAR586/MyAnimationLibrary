@@ -1,16 +1,11 @@
-package com.ydnsa.koinmvi.screens
+package com.ydnsa.koinmvi.sample.screens
 
-import android.R.attr.label
-import android.R.attr.shape
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.animateSizeAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.runtime.getValue
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,10 +15,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -33,11 +26,8 @@ import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -63,12 +53,12 @@ fun CollopesImage(
 
    val animatesixe by animateDpAsState(
         targetValue = targetSize,
-        animationSpec = tween(durationMillis = 500),
+        animationSpec = tween(durationMillis = 1000),
         label = "sixe"
     )
 
     val animatedAlignment = animateAlignmentAsState(
-        if (offsett>0) BiasAlignment(-1f, -1f) else BiasAlignment(0f, 0f)
+        if (offsett>0) BiasAlignment(-0.9f, -0.8f) else BiasAlignment(0f, 0f)
 
     )
 
@@ -77,14 +67,16 @@ fun CollopesImage(
         snapshotFlow { listState.firstVisibleItemScrollOffset }
             .collect { offset ->
                 offsett=offset
-                targetHeight = if (offset > 0) 100.dp else 200.dp
-                targetSize  =   if(offset>0) 80.dp else 110.dp
+                targetHeight = if (offset > 0) 60.dp else 200.dp
+                targetSize  =   if(offset>0) 50.dp else 110.dp
 
             }
     }
 
 
    LazyColumn(state = listState,
+
+       
        modifier = modifier.fillMaxSize()) {
 
        stickyHeader {
@@ -93,7 +85,7 @@ fun CollopesImage(
                .background(Color.Yellow)
            ) {
 
-               Box(modifier=modifier.size(targetSize).padding(10.dp).clip(shape = RoundedCornerShape(100.dp))
+               Box(modifier=modifier.size(animatesixe).padding(5.dp).clip(shape = RoundedCornerShape(100.dp))
                    .align(alignment = animatedAlignment)
                    .background(Color.White)
                ) {  }
@@ -102,10 +94,8 @@ fun CollopesImage(
        }
 
        items(40){item ->
-           Box(modifier=modifier.fillMaxWidth().defaultMinSize(100.dp).padding(20.dp)
-               .background(Color.LightGray)
-           ) {
-                Text(item.toString())
+           Box(modifier=modifier.padding(5.dp)){
+               UserCardComponent(modifier=modifier)
            }
 
 
