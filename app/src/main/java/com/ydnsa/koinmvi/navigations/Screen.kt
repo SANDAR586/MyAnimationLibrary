@@ -1,0 +1,5 @@
+package com.ydnsa.koinmvi.navigations
+
+sealed class Screen(val route:String) {
+    object Login : Screen("Login")
+}
