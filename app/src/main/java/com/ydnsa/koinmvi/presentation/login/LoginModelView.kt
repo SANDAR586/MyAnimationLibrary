@@ -1,5 +1,6 @@
 package com.ydnsa.koinmvi.presentation.login
 
+import LoginResponse
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ydnsa.koinmvi.domain.usecase.LoginUseCase
@@ -36,14 +37,14 @@ class LoginModelView (
 
             }
             delay(3000L)
-         val a : Boolean=  loginUseCase(_loginState.value.username,_loginState.value.password)
-            if(a){
+         val result : LoginResponse=  loginUseCase(_loginState.value.username,_loginState.value.password)
+            if(result.success){
                 _loginState.update { currentState ->
                     currentState.copy(
                         isSuccess = true,
                         isLoading = false,
                         isError = false,
-                        errorMessage = "Login Success"
+                        errorMessage = "Login Success , Welcome ${currentState.username} "
                     )
 
                 }

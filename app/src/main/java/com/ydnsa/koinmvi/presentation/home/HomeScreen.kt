@@ -10,7 +10,7 @@ fun HomeScreen(
     state: HomeState,
     onAction: (HomeAction) -> Unit,
 ) {
-    // TODO UI Rendering
+
 }
 
 @Composable
