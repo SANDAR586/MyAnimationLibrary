@@ -40,3 +40,19 @@ val uiState by loginCoordinator.loginState.collectAsStateWithLifecycle()
 val actionsHandler: (LoginIntent) -> Unit = { action -> 
     loginCoordinator.handleIntent(action)
 }
+
+## 🛠 API Services
+
+This project uses **two separate Retrofit instances** to handle different types of backend responses:
+
+- **Moshi-based API** (default):  
+  Optimized for clean, well-structured APIs. Provides better Kotlin support, null safety, and performance.
+
+- **Gson-based API** (legacy/edge cases):  
+  Used only when custom parsing or flexible JSON handling is needed, especially for inconsistent or non-standard API responses.
+
+### Why two?
+> Most of the API is clean and modern, so we use **Moshi** for better performance and Kotlin integration. But a few legacy endpoints require **Gson** for custom deserialization and edge-case handling.
+
+Each API is defined with its own interface, and dependency injection is managed via **Koin** for seamless switching between the two.
+
