@@ -4,8 +4,8 @@ data class LoginState (
     val isLoading : Boolean = false,
     val isSuccess : Boolean =false,
     val isError : Boolean = false,
-    val password :String ="",
-    val username:String="",
+    val password :String ="password",
+    val username:String="admin",
     val isPasswordVisible: Boolean = false,
     val errorMessage:String =""
 

@@ -3,7 +3,10 @@ package com.ydnsa.koinmvi.presentation.login
 import LoginResponse
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavGraph
+import androidx.navigation.NavHostController
 import com.ydnsa.koinmvi.domain.usecase.LoginUseCase
+import com.ydnsa.koinmvi.navigations.Screen
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,7 +16,9 @@ import kotlinx.coroutines.launch
 import kotlin.math.log
 
 class LoginModelView (
-    private val loginUseCase: LoginUseCase
+    private val loginUseCase: LoginUseCase,
+
+
 ) : ViewModel() {
     private  val _loginState = MutableStateFlow(LoginState())
     val loginState: StateFlow<LoginState> = _loginState
@@ -46,6 +51,7 @@ class LoginModelView (
                         isError = false,
                         errorMessage = "Login Success , Welcome ${currentState.username} "
                     )
+
 
                 }
             }else{

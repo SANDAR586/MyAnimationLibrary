@@ -61,6 +61,14 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.converter.moshit)
     implementation(libs.converter.gson)
+    implementation (libs.tensorflow.tensorflow.lite)
+    // Task library for object detection
+    implementation (libs.tensorflow.lite.task.vision)
+
+    // CameraX for live camera feed
+    implementation (libs.androidx.camera.camera2)
+    implementation (libs.androidx.camera.lifecycle)
+    implementation (libs.androidx.camera.view)
 
 
     testImplementation(libs.junit)

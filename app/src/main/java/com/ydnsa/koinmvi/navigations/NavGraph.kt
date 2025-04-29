@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.ydnsa.koinmvi.presentation.home.HomeRoute
 import com.ydnsa.koinmvi.presentation.login.LoginRoot
 import com.ydnsa.koinmvi.presentation.login.composables.LoginScreen
 
@@ -14,7 +15,10 @@ fun AppNavGraph(navHostController: NavHostController){
     NavHost(navHostController, startDestination = Screen.Login.route){
 
         composable(Screen.Login.route){
-            LoginRoot()
+            LoginRoot(navHostController)
+        }
+        composable(Screen.Home.route){
+            HomeRoute()
         }
     }
 

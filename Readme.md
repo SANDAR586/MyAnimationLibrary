@@ -35,6 +35,12 @@ A modern Android project demonstrating:
 - **Intent:** User actions or UI events.
 - **Coordinator:** Handles intents, maps them to use cases, and updates the state.
 
+```kotlin
+val uiState by loginCoordinator.loginState.collectAsStateWithLifecycle()
+val actionsHandler: (LoginIntent) -> Unit = { action -> 
+    loginCoordinator.handleIntent(action)
+}
+```
 ## 🛠 API Services
 
 This project uses **two separate Retrofit instances** to handle different types of backend responses:
@@ -51,10 +57,5 @@ This project uses **two separate Retrofit instances** to handle different types 
 Each API is defined with its own interface, and dependency injection is managed via **Koin** for seamless switching between the two.
 
 
-```kotlin
-val uiState by loginCoordinator.loginState.collectAsStateWithLifecycle()
-val actionsHandler: (LoginIntent) -> Unit = { action -> 
-    loginCoordinator.handleIntent(action)
-}
 
 

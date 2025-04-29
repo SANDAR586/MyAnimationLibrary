@@ -22,6 +22,9 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.ydnsa.koinmvi.navigations.Screen
 import com.ydnsa.koinmvi.presentation.login.LoginIntent
 import com.ydnsa.koinmvi.presentation.login.LoginState
 
@@ -29,7 +32,8 @@ import com.ydnsa.koinmvi.presentation.login.LoginState
 @Composable
 fun LoginScreen(
     uiState: LoginState,
-    onAction: (LoginIntent) -> Unit
+    onAction: (LoginIntent) -> Unit,
+    navHostController: NavHostController
 
 ) {
     val messageStyle = TextStyle(fontWeight = FontWeight.Bold)
@@ -77,6 +81,7 @@ fun LoginScreen(
         ElevatedButton(
             onClick = {
                 onAction(LoginIntent.Submit)
+                navHostController.navigate(Screen.Home.route)
             }
         ) {
             Text("Login",
@@ -112,5 +117,6 @@ fun LoginScreen(
 @Preview(name = "LoginScreen")
 @Composable
 private fun PreviewLoginScreen() {
-LoginScreen(uiState = LoginState(), onAction = {})
+    val navHostController= rememberNavController()
+LoginScreen(uiState = LoginState(), onAction = {},navHostController)
 }
