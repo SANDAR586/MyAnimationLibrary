@@ -21,17 +21,7 @@ fun HomeScreen(
     state: HomeState,
     onAction: (HomeAction) -> Unit,
 ) {
-    if (ContextCompat.checkSelfPermission(LocalContext.current, Manifest.permission.CAMERA)
-        == PackageManager.PERMISSION_GRANTED) {
-        Box(modifier = Modifier.fillMaxSize()) {
-            CameraComponent(modifier = Modifier.fillMaxSize())
-        }
-    }else{
 
-        Box(modifier = Modifier.fillMaxSize().background(Color.Green)) {
-            CameraPermissionRequest()
-        }
-    }
 
 
 
