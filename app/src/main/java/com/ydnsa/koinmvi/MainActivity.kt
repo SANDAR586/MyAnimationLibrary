@@ -11,6 +11,7 @@ import com.ydnsa.koinmvi.di.gsonModule
 import com.ydnsa.koinmvi.di.moshiModule
 import com.ydnsa.koinmvi.navigations.AppNavGraph
 import com.ydnsa.koinmvi.presentation.login.LoginRoot
+import com.ydnsa.koinmvi.ui.theme.AppTheme
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -19,16 +20,18 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            val applicationModules=listOf(
-                appModule, moshiModule, gsonModule
-            )
+            AppTheme{
+                val applicationModules=listOf(
+                    appModule, moshiModule, gsonModule
+                )
+                startKoin {
+                    androidContext(this@MainActivity)
+                    modules(applicationModules)
+                }
+                val navHostController: NavHostController= rememberNavController()
+                AppNavGraph(navHostController)
 
-            startKoin {
-                androidContext(this@MainActivity)
-                modules(applicationModules)
             }
-            val navHostController: NavHostController= rememberNavController()
-            AppNavGraph(navHostController)
         }
     }
 

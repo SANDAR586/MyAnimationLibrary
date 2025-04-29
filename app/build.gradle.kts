@@ -69,7 +69,8 @@ dependencies {
     implementation (libs.androidx.camera.camera2)
     implementation (libs.androidx.camera.lifecycle)
     implementation (libs.androidx.camera.view)
-
+    // to set the status bar theme
+   // implementation (libs.accompanist.systemuicontroller) wrong version
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
