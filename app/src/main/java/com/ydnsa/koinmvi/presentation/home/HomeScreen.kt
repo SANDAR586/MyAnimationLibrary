@@ -18,14 +18,14 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
+
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
+import com.ydnsa.koinmvi.presentation.home.components.HomeElevatedCard
 import com.ydnsa.koinmvi.ui.theme.AppTheme
 
 
@@ -84,38 +84,7 @@ fun HomeScreen(
         ) {
             items(50){item ->
 
-                ElevatedCard (
-                    modifier = Modifier.fillMaxWidth()
-                        .aspectRatio(1f).padding(5.dp)
-                    ,
-                    elevation = CardDefaults.cardElevation(4.dp),
-                    onClick = {
-
-                    }
-
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(MaterialTheme.colorScheme.primary),
-                        contentAlignment = Alignment.Center // Center content inside the Box
-                    ) {
-                        Image(
-                            painter = painterResource(R.drawable.notebook),
-                            contentDescription = "",
-                            modifier = Modifier.size(80.dp)
-                        )
-
-                        Text(
-                            text = "Note",
-                            modifier = Modifier
-                                .padding(top = 100.dp), // Adjust the position of the text if necessary
-                            style = TextStyle(
-                                color = MaterialTheme.colorScheme.onPrimary,
-                                fontWeight = FontWeight.W500
-                            )
-                        )
-                    }
+                HomeElevatedCard( modifier = Modifier, "",R.drawable.notebook,{})
 
                 }
 
@@ -126,7 +95,7 @@ fun HomeScreen(
 
 
 
-}
+
 
 @Composable
 @Preview(name = "Home", device = "id:Nexus 5")
