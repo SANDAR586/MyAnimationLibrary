@@ -8,6 +8,7 @@ import com.ydnsa.koinmvi.data.repository.LoginRepositoryImpl
 import com.ydnsa.koinmvi.domain.usecase.LoginUseCase
 import com.ydnsa.koinmvi.presentation.home.HomeViewModel
 import com.ydnsa.koinmvi.presentation.login.LoginModelView
+import com.ydnsa.koinmvi.presentation.noteitemlist.NoteItemListViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -24,6 +25,7 @@ val appModule= module{
         LoginModelView(get())
     }
     viewModel { HomeViewModel(get()) }
+    viewModel { NoteItemListViewModel(get()) }
 
 
 }

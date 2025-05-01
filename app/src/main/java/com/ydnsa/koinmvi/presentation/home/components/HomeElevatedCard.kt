@@ -1,5 +1,6 @@
 package com.ydnsa.koinmvi.presentation.home.components
 
+import android.R.attr.onClick
 import android.service.autofill.OnClickAction
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -23,20 +24,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ydnsa.koinmvi.R
+import com.ydnsa.koinmvi.presentation.home.HomeItems
 
 @Composable
 fun HomeElevatedCard(
     modifier: Modifier = Modifier,
-    itmeName : String ,
-    @DrawableRes icon : Int,
-    onClick: () -> Unit
+    homeItmes: HomeItems
 
 ) {
     ElevatedCard(
         modifier = modifier.fillMaxWidth()
             .aspectRatio(1f).padding(5.dp),
         elevation = CardDefaults.cardElevation(4.dp),
-        onClick = { onClick() }
+        onClick = { homeItmes.onClick }
 
     ) {
         Box(
@@ -46,13 +46,13 @@ fun HomeElevatedCard(
             contentAlignment = Alignment.Center // Center content inside the Box
         ) {
             Image(
-                painter = painterResource(icon),
+                painter = painterResource(homeItmes.icon),
                 contentDescription = "",
                 modifier = Modifier.size(80.dp)
             )
 
             Text(
-                text = itmeName,
+                text = homeItmes.itemName,
                 modifier = Modifier
                     .padding(top = 100.dp), // Adjust the position of the text if necessary
                 style = TextStyle(
@@ -67,7 +67,10 @@ fun HomeElevatedCard(
 @Preview(name = "HomeElevatedCard")
 @Composable
 private fun PreviewHomeElevatedCard() {
+    val homeItmes= HomeItems(
+        "",R.drawable.notebook,{}
+    )
     HomeElevatedCard(
-        Modifier,"Noob",R.drawable.notebook,{},
+        Modifier,homeItmes
     )
 }

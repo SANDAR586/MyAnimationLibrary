@@ -1,4 +1,4 @@
-package com.ydnsa.koinmvi.presentation.home.components
+package com.ydnsa.koinmvi.sample.aifeatures
 
 import android.content.Context
 import android.util.Log

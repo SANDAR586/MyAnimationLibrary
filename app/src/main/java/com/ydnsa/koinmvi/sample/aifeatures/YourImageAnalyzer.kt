@@ -1,4 +1,4 @@
-package com.ydnsa.koinmvi.presentation.home.components
+package com.ydnsa.koinmvi.sample.aifeatures
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -16,7 +16,6 @@ import org.tensorflow.lite.support.common.FileUtil
 import java.io.ByteArrayOutputStream
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
-import androidx.core.graphics.scale
 
 val labels = listOf(
     "person", "bicycle", "car", "dog", "cat", "bird", "horse", "sheep", "cow", "elephant",

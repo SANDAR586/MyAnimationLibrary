@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import com.ydnsa.koinmvi.presentation.home.HomeRoute
 import com.ydnsa.koinmvi.presentation.login.LoginRoot
 import com.ydnsa.koinmvi.presentation.login.composables.LoginScreen
+import com.ydnsa.koinmvi.presentation.noteitemlist.NoteItemListRoute
 
 @Composable
 fun AppNavGraph(navHostController: NavHostController){
@@ -18,7 +19,12 @@ fun AppNavGraph(navHostController: NavHostController){
             LoginRoot(navHostController)
         }
         composable(Screen.Home.route){
-            HomeRoute()
+            HomeRoute(navHostController)
+        }
+        composable (Screen.NotesItemList.route){
+            NoteItemListRoute(
+                navHostController
+            )
         }
     }
 

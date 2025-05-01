@@ -1,7 +1,9 @@
 package com.ydnsa.koinmvi.presentation.home
 
-import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-
+import androidx.annotation.DrawableRes
+import androidx.navigation.NavHostController
+import com.ydnsa.koinmvi.R
+import com.ydnsa.koinmvi.navigations.Screen
 
 /**
  * UI State that represents HomeScreen
@@ -16,4 +18,13 @@ class HomeState
 sealed interface HomeAction {
     data object OnClick : HomeAction
 }
+
+data class HomeItems(
+    val itemName: String,
+    @DrawableRes val icon: Int,
+    val onClick: (NavHostController) -> Unit
+)
+
+
+
 

@@ -81,7 +81,11 @@ fun LoginScreen(
         ElevatedButton(
             onClick = {
                 onAction(LoginIntent.Submit)
-                navHostController.navigate(Screen.Home.route)
+                navHostController.navigate(Screen.Home.route){
+                    popUpTo(Screen.Login.route) {
+                        inclusive = true
+                    }
+                }
             }
         ) {
             Text("Login",
