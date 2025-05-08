@@ -23,20 +23,25 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.ydnsa.koinmvi.R
+import com.ydnsa.koinmvi.presentation.home.HomeAction
 import com.ydnsa.koinmvi.presentation.home.HomeItems
 
 @Composable
 fun HomeElevatedCard(
     modifier: Modifier = Modifier,
-    homeItmes: HomeItems
+    homeItmes: HomeItems,
+    navHostController: NavHostController
+
 
 ) {
     ElevatedCard(
         modifier = modifier.fillMaxWidth()
             .aspectRatio(1f).padding(5.dp),
         elevation = CardDefaults.cardElevation(4.dp),
-        onClick = { homeItmes.onClick }
+        onClick = { handlNavigation(navHostController,homeItmes.action) }
 
     ) {
         Box(
@@ -68,9 +73,10 @@ fun HomeElevatedCard(
 @Composable
 private fun PreviewHomeElevatedCard() {
     val homeItmes= HomeItems(
-        "",R.drawable.notebook,{}
+        "",R.drawable.notebook, HomeAction.OnClick
     )
+    val navHostController= rememberNavController()
     HomeElevatedCard(
-        Modifier,homeItmes
+        Modifier,homeItmes,navHostController
     )
 }

@@ -8,6 +8,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.ydnsa.koinmvi.presentation.login.composables.LoginScreen
+import com.ydnsa.koinmvi.sample.WalkingDucks
+import com.ydnsa.koinmvi.sample.screens.CollopesImage
 import org.koin.compose.koinInject
 
 
@@ -26,7 +28,9 @@ fun LoginRoot(
 
 
 
-        LoginScreen(uiState,loginAction,navHostController)
+    WalkingDucks()
+      //  LoginScreen(uiState,loginAction,navHostController)
+
 
 }
 

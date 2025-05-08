@@ -40,11 +40,13 @@ fun HomeScreen(
             ),
             columns = GridCells.Fixed(2)
         ) {
-            val items=getHomeItems(navHostController)
+            val items=getHomeItems()
             items(items.size) { homeItem ->
                 HomeElevatedCard(
                     modifier = Modifier,
-                    homeItmes = items[homeItem]
+                    homeItmes = items[homeItem],
+                    navHostController
+
                 )
             }
         }

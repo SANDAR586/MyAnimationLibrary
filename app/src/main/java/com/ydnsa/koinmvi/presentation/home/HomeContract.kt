@@ -17,12 +17,13 @@ class HomeState
 
 sealed interface HomeAction {
     data object OnClick : HomeAction
+    data object NavigateToNote: HomeAction
 }
 
 data class HomeItems(
     val itemName: String,
     @DrawableRes val icon: Int,
-    val onClick: (NavHostController) -> Unit
+    val action: HomeAction
 )
 
 

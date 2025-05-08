@@ -1,3 +1,4 @@
+import org.gradle.kotlin.dsl.annotationProcessor
 import org.gradle.kotlin.dsl.implementation
 
 plugins {
@@ -64,6 +65,13 @@ dependencies {
     implementation (libs.tensorflow.tensorflow.lite)
     // Task library for object detection
     implementation (libs.tensorflow.lite.task.vision)
+    implementation (libs.androidx.material.icons.extended)
+    implementation (libs.google.accompanist.insets)
+
+    //Glide
+    implementation (libs.com.github.bumptech.glide.glide)
+    annotationProcessor (libs.compiler)
+
 
     // CameraX for live camera feed
     implementation (libs.androidx.camera.camera2)
@@ -71,6 +79,11 @@ dependencies {
     implementation (libs.androidx.camera.view)
     // to set the status bar theme
    // implementation (libs.accompanist.systemuicontroller) wrong version
+
+    implementation(libs.wasabeef.richeditor.android)
+
+    implementation(libs.coil.compose)
+    implementation(libs.coil.gif)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

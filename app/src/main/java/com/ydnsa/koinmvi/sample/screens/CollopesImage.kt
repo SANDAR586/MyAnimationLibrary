@@ -4,6 +4,7 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.getValue
@@ -21,13 +22,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
-import androidx.compose.ui.Alignment
+
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.material3.*
+import androidx.compose.ui.Alignment
+import coil3.compose.rememberAsyncImagePainter
+import com.ydnsa.koinmvi.R
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -36,7 +41,6 @@ fun CollopesImage(
 ) {
     val listState = rememberLazyListState()
     var targetHeight by remember { mutableStateOf(200.dp) }
-    var profileAlig by remember { mutableStateOf(Alignment.Center) }
     var offsett by remember { mutableStateOf(0) }
     var targetSize by remember { mutableStateOf(100.dp) }
 
@@ -58,7 +62,7 @@ fun CollopesImage(
     )
 
     val animatedAlignment = animateAlignmentAsState(
-        if (offsett>0) BiasAlignment(-0.9f, -0.8f) else BiasAlignment(0f, 0f)
+        if (offsett>0) BiasAlignment(-0.9f, -0.5f) else BiasAlignment(0f, 0f)
 
     )
 
@@ -73,34 +77,50 @@ fun CollopesImage(
             }
     }
 
-
-   LazyColumn(state = listState,
-
-       
-       modifier = modifier.fillMaxSize()) {
-
-       stickyHeader {
-           Box(modifier=modifier.height(animatedHeight)
-               .fillMaxWidth()
-               .background(Color.Yellow)
-           ) {
-
-               Box(modifier=modifier.size(animatesixe).padding(5.dp).clip(shape = RoundedCornerShape(100.dp))
-                   .align(alignment = animatedAlignment)
-                   .background(Color.White)
-               ) {  }
-
-           }
-       }
-
-       items(40){item ->
-           Box(modifier=modifier.padding(5.dp)){
-               UserCardComponent(modifier=modifier)
-           }
+    Scaffold(){padding ->
+        LazyColumn(state = listState,
 
 
-       }
-   }
+            modifier = Modifier.fillMaxSize().padding(padding)) {
+
+            stickyHeader {
+                Box(modifier=Modifier.height(animatedHeight)
+                    .fillMaxWidth()
+                    .background(MaterialTheme.colorScheme.background)
+                ) {
+
+                    Box(modifier=Modifier.size(animatesixe).padding(5.dp).clip(shape = RoundedCornerShape(100.dp))
+                        .align(alignment = animatedAlignment)
+                        .background(MaterialTheme.colorScheme.tertiary)
+                    ) {
+                        Image(
+                            painter = rememberAsyncImagePainter(
+                                R.drawable.giphy
+                            ), contentDescription = "",
+                            modifier= Modifier.fillMaxSize(0.5f)
+                                .align(Alignment.Center)
+                        )
+                    }
+
+                }
+            }
+
+            items(40){item ->
+                Box(modifier=Modifier.padding(
+                    horizontal = 16.dp,
+                    vertical = 10.dp
+                )){
+                    UserCardComponent(modifier=modifier)
+                }
+
+
+            }
+        }
+
+    }
+
+
+
 }
 
 @Composable

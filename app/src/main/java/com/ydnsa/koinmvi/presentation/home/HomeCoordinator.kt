@@ -13,10 +13,10 @@ class HomeCoordinator(
 ) {
     val screenStateFlow = viewModel.stateFlow
     fun handle(action: HomeAction) {
-        when (action) {
-            HomeAction.OnClick -> {
-            }
-        }
+//        when (action) {
+//            HomeAction.OnClick -> {
+//            }
+//        }
     }
 
 
