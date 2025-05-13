@@ -1,6 +1,6 @@
-package com.ydnsa.koinmvi.data.api
+package com.ydnsa.koinmvi.data.network.api
 
-import com.ydnsa.koinmvi.data.model.Client
+import com.ydnsa.koinmvi.data.network.model.Client
 import retrofit2.http.GET
 
 

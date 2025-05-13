@@ -1,4 +1,4 @@
-package com.ydnsa.koinmvi.data.repository
+package com.ydnsa.koinmvi.data.network.repository
 
 import LoginResponse
 import com.ydnsa.koinmvi.data.fake.LoginApi

@@ -3,8 +3,8 @@ package com.ydnsa.koinmvi.di
 
 import com.ydnsa.koinmvi.data.fake.FakeJsonReader
 import com.ydnsa.koinmvi.data.fake.LoginApi
-import com.ydnsa.koinmvi.data.repository.LoginRepository
-import com.ydnsa.koinmvi.data.repository.LoginRepositoryImpl
+import com.ydnsa.koinmvi.data.network.repository.LoginRepository
+import com.ydnsa.koinmvi.data.network.repository.LoginRepositoryImpl
 import com.ydnsa.koinmvi.domain.usecase.LoginUseCase
 import com.ydnsa.koinmvi.presentation.home.HomeViewModel
 import com.ydnsa.koinmvi.presentation.login.LoginModelView

@@ -22,6 +22,7 @@ materialIconsExtended = "1.7.8"
 moshi = "1.15.2"
 navigationCompose = "2.8.9"
 retrofit = "2.11.0"
+roomRuntimeVersion = "2.7.1"
 tensorflowLiteTaskVision = "0.4.0"
 tensorflowTensorflowLite = "2.13.0"
 richeditorAndroidVersion = "1.0.0-rc09"
@@ -35,6 +36,9 @@ androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = 
 androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntimeVersion" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntimeVersion" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntimeVersion" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilComposeVersion" }
 coil-gif = { module = "io.coil-kt.coil3:coil-gif" , version.ref="coilComposeVersion" }
 com-github-bumptech-glide-glide = { module = "com.github.bumptech.glide:glide", version.ref = "githubGlide" }
