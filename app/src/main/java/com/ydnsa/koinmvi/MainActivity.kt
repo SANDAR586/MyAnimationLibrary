@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.ydnsa.koinmvi.di.appModule
+import com.ydnsa.koinmvi.di.databaseModule
 import com.ydnsa.koinmvi.di.gsonModule
 import com.ydnsa.koinmvi.di.moshiModule
 import com.ydnsa.koinmvi.navigations.AppNavGraph
@@ -22,7 +23,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             AppTheme{
                 val applicationModules=listOf(
-                    appModule, moshiModule, gsonModule
+                    appModule, moshiModule, gsonModule, databaseModule
                 )
                 startKoin {
                     androidContext(this@MainActivity)
@@ -30,7 +31,6 @@ class MainActivity : ComponentActivity() {
                 }
                 val navHostController: NavHostController= rememberNavController()
                 AppNavGraph(navHostController)
-
             }
         }
     }

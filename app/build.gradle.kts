@@ -6,7 +6,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlinx.serialization)
-    id("com.google.devtools.ksp")
+    id("androidx.room")
+    id("com.google.devtools.ksp") version "2.1.21-2.0.1"
 
 }
 
@@ -24,6 +25,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -33,6 +35,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -43,12 +46,15 @@ android {
     buildFeatures {
         compose = true
     }
+    room {
+        schemaDirectory("$projectDir/schemas")
+    }
 }
 
 dependencies {
 
     implementation(libs.androidx.room.runtime)
-    ksp(libs.androidx.room.compiler)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -70,6 +76,8 @@ dependencies {
     implementation (libs.tensorflow.lite.task.vision)
     implementation (libs.androidx.material.icons.extended)
     implementation (libs.google.accompanist.insets)
+
+    ksp(libs.androidx.room.compiler)
 
     //Glide
     implementation (libs.com.github.bumptech.glide.glide)

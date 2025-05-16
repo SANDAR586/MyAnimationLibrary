@@ -6,8 +6,15 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.supervisorScope
 
 fun main() {
-    runBlocking {
-        doIndependentWork()
+    printLength(null)
+
+}
+
+fun printLength(str: String?) {
+    str.let{
+    println("it is not null")
+    }?:{
+        println("it is null")
     }
 }
 
