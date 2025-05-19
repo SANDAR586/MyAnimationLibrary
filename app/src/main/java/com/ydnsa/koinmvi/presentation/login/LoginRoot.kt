@@ -28,8 +28,8 @@ fun LoginRoot(
 
 
 
-    WalkingDucks()
-      //  LoginScreen(uiState,loginAction,navHostController)
+    //WalkingDucks() ( test the samples here)
+    LoginScreen(uiState,loginAction,navHostController)
 
 
 }
