@@ -16,11 +16,11 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 
 
 val appModule= module{
-    single { LoginApi(androidContext()) }
+    single { LoginApi() }
 
     single<LoginRepository> { LoginRepositoryImpl(get()) }
     factory { LoginUseCase(get()) }
-    factory { FakeJsonReader(androidContext()) }
+    factory { FakeJsonReader() }
     viewModel{
         LoginModelView(get())
     }

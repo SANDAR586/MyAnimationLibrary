@@ -22,7 +22,8 @@ import com.ydnsa.koinmvi.ui.theme.AppTheme
 fun CustomTopBar(
     modifier: Modifier = Modifier,
      title:String ="Default",
-    containerColor: Color?
+    containerColor: Color?,
+    navigationIcon: (@Composable (() -> Unit))?=null
 ) {
 
         Surface(
@@ -47,6 +48,9 @@ fun CustomTopBar(
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor =  containerColor ?: MaterialTheme.colorScheme.background
                 ),
+                navigationIcon ={
+                    navigationIcon?.invoke()
+                }
 
                 )
         }

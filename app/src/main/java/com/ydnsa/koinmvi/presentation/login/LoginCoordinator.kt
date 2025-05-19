@@ -1,5 +1,6 @@
 package com.ydnsa.koinmvi.presentation.login
 
+import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 
@@ -8,10 +9,10 @@ class LoginCoordinator(
 ) {
     val loginState = loginModelView.loginState
 
-    fun handle(action : LoginIntent){
+    fun handle(action : LoginIntent,context: Context){
         when(action){
             is LoginIntent.Submit ->{
-                loginModelView.login()
+                loginModelView.login(context)
             }
             LoginIntent.TooglePasswordVisibility -> loginModelView.tooglePasswordIcon()
             is LoginIntent.IsPasswordChange -> { loginModelView.passwordChange(action.name)}

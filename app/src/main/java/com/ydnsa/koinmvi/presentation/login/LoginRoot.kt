@@ -3,6 +3,7 @@ package com.ydnsa.koinmvi.presentation.login
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
@@ -17,13 +18,15 @@ import org.koin.compose.koinInject
 fun LoginRoot(
     navHostController: NavHostController
 ) {
+    val context = LocalContext.current
     val loginModelView : LoginModelView= koinInject()
     val loginCoordinator = rememberLoginCoordinator(loginModelView)
 
     val uiState by loginCoordinator.loginState.collectAsStateWithLifecycle()
 
     val loginAction:(LoginIntent) -> Unit = { loginIntent ->
-        loginCoordinator.handle(loginIntent)
+
+        loginCoordinator.handle(loginIntent,context)
     }
 
 

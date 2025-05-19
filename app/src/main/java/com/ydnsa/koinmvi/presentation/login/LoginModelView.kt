@@ -1,6 +1,7 @@
 package com.ydnsa.koinmvi.presentation.login
 
 import LoginResponse
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavGraph
@@ -32,7 +33,7 @@ class LoginModelView (
         }
     }
 
-     fun login(){
+     fun login(context: Context){
         viewModelScope.launch{
             _loginState.update { currentState ->
                 currentState.copy(
@@ -42,7 +43,7 @@ class LoginModelView (
 
             }
             delay(3000L)
-         val result : LoginResponse=  loginUseCase(_loginState.value.username,_loginState.value.password)
+         val result : LoginResponse=  loginUseCase(_loginState.value.username,_loginState.value.password,context)
             if(result.success){
                 _loginState.update { currentState ->
                     currentState.copy(

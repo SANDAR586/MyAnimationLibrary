@@ -3,12 +3,12 @@ package com.ydnsa.koinmvi.data.fake
 import LoginResponse
 import android.content.Context
 
-class LoginApi(private val context: Context) {
-     fun login( username:String ,  password:String) : LoginResponse{
+class LoginApi() {
+     fun login( username:String ,  password:String ,context : Context) : LoginResponse{
          if(username == "admin" && password == "password") {
-             return FakeJsonReader(context).readLoginResponse()
+             return FakeJsonReader().readLoginResponse(context)
          }else{
-             var data = FakeJsonReader(context).readLoginResponse()
+             var data = FakeJsonReader().readLoginResponse(context)
              data=  data.copy(success = false)
              return data;
          }
