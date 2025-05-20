@@ -15,9 +15,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import androidx.compose.material3.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import com.ydnsa.koinmvi.navigations.Screen
 import com.ydnsa.koinmvi.presentation.cutom.CustomTopBar
+import com.ydnsa.koinmvi.presentation.noteitemlist.components.NoteCardItem
 
 
 @Composable
@@ -48,20 +48,12 @@ fun NoteItemListScreen(
    ) { padding ->
        LazyColumn(modifier = Modifier.padding(padding)) {
            items(state.files.size) { file ->
-              ElevatedCard(
-                  onClick = {
-                      navHostController.navigate(Screen.NoteEdit.route)
-                  }
-              ) {
-                  Row {
-                      Icon(
-                          imageVector = Icons.Filled.FileCopy,
-                          contentDescription =null,
-                      )
-                      Text(text = state.files[file])
-                  }
-
-              }
+               NoteCardItem(
+                   title = state.files[file],
+                   contentPreview = "file data",
+                   date = "12 June 2025",
+                   onClick = {}
+               )
            }
        }
    }

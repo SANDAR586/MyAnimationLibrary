@@ -21,7 +21,6 @@ fun LoginRoot(
     val context = LocalContext.current
     val loginModelView : LoginModelView= koinInject()
     val loginCoordinator = rememberLoginCoordinator(loginModelView)
-
     val uiState by loginCoordinator.loginState.collectAsStateWithLifecycle()
 
     val loginAction:(LoginIntent) -> Unit = { loginIntent ->

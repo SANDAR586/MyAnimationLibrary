@@ -72,6 +72,8 @@ dependencies {
     implementation(libs.converter.moshit)
     implementation(libs.converter.gson)
     implementation (libs.tensorflow.tensorflow.lite)
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.material)
     // Task library for object detection
     implementation (libs.tensorflow.lite.task.vision)
     implementation (libs.androidx.material.icons.extended)

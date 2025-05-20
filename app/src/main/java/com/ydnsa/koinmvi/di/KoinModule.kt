@@ -3,6 +3,7 @@ package com.ydnsa.koinmvi.di
 
 import com.ydnsa.koinmvi.data.fake.FakeJsonReader
 import com.ydnsa.koinmvi.data.fake.LoginApi
+import com.ydnsa.koinmvi.data.local.DataStoreManager
 import com.ydnsa.koinmvi.data.network.repository.LoginRepository
 import com.ydnsa.koinmvi.data.network.repository.LoginRepositoryImpl
 import com.ydnsa.koinmvi.domain.usecase.LoginUseCase
@@ -19,6 +20,7 @@ val appModule= module{
     single { LoginApi() }
 
     single<LoginRepository> { LoginRepositoryImpl(get()) }
+    single { DataStoreManager(androidContext()) }
     factory { LoginUseCase(get()) }
     factory { FakeJsonReader() }
     viewModel{

@@ -20,15 +20,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         setContent {
             AppTheme{
-                val applicationModules=listOf(
-                    appModule, moshiModule, gsonModule, databaseModule
-                )
-                startKoin {
-                    androidContext(this@MainActivity)
-                    modules(applicationModules)
-                }
                 val navHostController: NavHostController= rememberNavController()
                 AppNavGraph(navHostController)
             }

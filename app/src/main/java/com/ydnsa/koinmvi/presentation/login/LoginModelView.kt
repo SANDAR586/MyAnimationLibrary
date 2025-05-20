@@ -4,17 +4,12 @@ import LoginResponse
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavGraph
-import androidx.navigation.NavHostController
 import com.ydnsa.koinmvi.domain.usecase.LoginUseCase
-import com.ydnsa.koinmvi.navigations.Screen
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlin.math.log
 
 class LoginModelView (
     private val loginUseCase: LoginUseCase,
@@ -69,6 +64,8 @@ class LoginModelView (
         }
 
     }
+
+
 
      fun usenameUpdated(name: String){
         _loginState.update { currentState->

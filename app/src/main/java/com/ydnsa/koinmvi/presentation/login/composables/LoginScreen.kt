@@ -50,35 +50,16 @@ fun LoginScreen(
     navHostController: NavHostController
 
 ) {
-    val context=LocalContext.current
-    val loginMedia = remember {
-        MediaPlayer.create(context, R.raw.bg2).apply { isLooping=true }
-    }
-
-    LaunchedEffect(Unit) {
-        loginMedia.start()
-    }
-
+    BackGroundMedia()
     Box(
        modifier =  Modifier
            .fillMaxSize()
            .background(MaterialTheme.colorScheme.background)
-
-
     ){
-
-
         Box(
             modifier = Modifier.align(Alignment.Center)
-
-
         ){
-           Card(
-               colors = CardDefaults.cardColors(
-
-               )
-
-           ) {
+           Card( colors = CardDefaults.cardColors()) {
                LoginBox(modifier = Modifier,uiState,onAction,navHostController)
            }
             Box( modifier = Modifier
@@ -87,13 +68,9 @@ fun LoginScreen(
                 .size(100.dp)
                 .background(MaterialTheme.colorScheme.tertiary,
                     shape = CircleShape) // <-- move background here
-
                 .clip(CircleShape)
-
-
             )
                 {
-
                 Image(painter = rememberAsyncImagePainter(R.drawable.giphy),
                     contentDescription = "Walking Duck",
                     Modifier.size(50.dp).align(Alignment.Center)
@@ -102,15 +79,8 @@ fun LoginScreen(
                 )
             }
 
-
-
         }
-
     }
-
-
-
-
 
 }
 
