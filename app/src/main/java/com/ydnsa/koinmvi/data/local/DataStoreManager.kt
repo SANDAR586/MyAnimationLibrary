@@ -1,6 +1,7 @@
 package com.ydnsa.koinmvi.data.local
 
 import android.content.Context
+import android.util.Log
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
@@ -16,6 +17,7 @@ class DataStoreManager(private val context: Context) {
    suspend fun saveName(name: String){
         context.dataStore.edit { pref ->
         pref[nameKey] =name
+            Log.d("Pref",pref[nameKey]?:"Default")
         }
     }
 

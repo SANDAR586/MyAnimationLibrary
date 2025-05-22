@@ -4,6 +4,7 @@ import LoginResponse
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ydnsa.koinmvi.data.local.DataStoreManager
 import com.ydnsa.koinmvi.domain.usecase.LoginUseCase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,6 +14,7 @@ import kotlinx.coroutines.launch
 
 class LoginModelView (
     private val loginUseCase: LoginUseCase,
+    private val dataStoreManager: DataStoreManager
 
 
 ) : ViewModel() {
@@ -40,6 +42,7 @@ class LoginModelView (
             delay(3000L)
          val result : LoginResponse=  loginUseCase(_loginState.value.username,_loginState.value.password,context)
             if(result.success){
+                saveName(_loginState.value.username)
                 _loginState.update { currentState ->
                     currentState.copy(
                         isSuccess = true,
@@ -65,6 +68,11 @@ class LoginModelView (
 
     }
 
+    fun saveName(name: String){
+       viewModelScope.launch {
+           dataStoreManager.saveName(name)
+       }
+    }
 
 
      fun usenameUpdated(name: String){
