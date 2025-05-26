@@ -1,29 +1,29 @@
 package com.ydnsa.koinmvi.presentation.notebook.notedetail
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
-
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.runtime.*
+import androidx.lifecycle.compose.*
+import androidx.navigation.*
 
 @Composable
 fun NoteDetailRoute(
-		coordinator : NoteDetailCoordinator = rememberNoteDetailCoordinator()
+        navHostController : NavHostController ,
                    )
 {
-	// State observing and declarations
-	val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(NoteDetailState())
-	
-	// UI Actions
-	val actionsHandler : (NoteDetailAction) -> Unit = { action ->
-		coordinator.handle(action)
-	}
-	
-	// UI Rendering
-	NoteDetailScreen(
-			state = uiState ,
-			onAction = actionsHandler
-	                )
+    val coordinator : NoteDetailCoordinator =
+            rememberNoteDetailCoordinator()    // State observing and declarations
+    val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(NoteDetailState())
+
+    // UI Actions
+    val actionsHandler : (NoteDetailAction) -> Unit = { action ->
+        coordinator.handle(action)
+    }
+
+    // UI Rendering
+    NoteDetailScreen(
+            state = uiState ,
+            onAction = actionsHandler ,
+            navHostController
+                    )
 }
 
 

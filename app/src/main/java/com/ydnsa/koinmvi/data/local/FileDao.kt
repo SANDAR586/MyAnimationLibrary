@@ -1,13 +1,14 @@
 package com.ydnsa.koinmvi.data.local
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
-interface FileDao {
+interface FileDao
+{
     @Insert
-    fun insertFile(vararg fileEntity: FileEntity)
+    fun insertFile(vararg fileEntity : FileEntity)
 
+    @Query("Select * from FileEntity")
+    fun getAllFiles() : List<FileEntity>
 
 }

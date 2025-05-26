@@ -1,11 +1,8 @@
-import org.gradle.kotlin.dsl.annotationProcessor
-import org.gradle.kotlin.dsl.implementation
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.kotlinx.serialization)
+    alias(libs.plugins.jetbrains.kotlin.serialization)
     id("androidx.room")
     id("com.google.devtools.ksp") version "2.1.21-2.0.1"
 
@@ -13,12 +10,12 @@ plugins {
 
 android {
     namespace = "com.ydnsa.koinmvi"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.ydnsa.koinmvi"
         minSdk = 29
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -30,9 +27,9 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
+                getDefaultProguardFile("proguard-android-optimize.txt") ,
                 "proguard-rules.pro"
-            )
+                         )
         }
     }
 
@@ -63,36 +60,40 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation (libs.koin.androidx.compose)
-    implementation (libs.androidx.navigation.compose)
+    implementation(libs.koin.androidx.compose)
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.retrofit)
     implementation(libs.moshi)
     implementation(libs.gson)
     implementation(libs.converter.moshit)
     implementation(libs.converter.gson)
-    implementation (libs.tensorflow.tensorflow.lite)
+    implementation("androidx.navigation3:navigation3-runtime:1.0.0-alpha01")
+    implementation("androidx.navigation3:navigation3-ui:1.0.0-alpha01")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-navigation3:1.0.0-SNAPSHOT")
+    implementation("androidx.compose.material3.adaptive:adaptive-navigation3:1.0.0-SNAPSHOT")
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.tensorflow.tensorflow.lite)
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.material)
     // Task library for object detection
-    implementation (libs.tensorflow.lite.task.vision)
-    implementation (libs.androidx.material.icons.extended)
-    implementation (libs.google.accompanist.insets)
+    implementation(libs.tensorflow.lite.task.vision)
+    implementation(libs.androidx.material.icons.extended)
+    implementation(libs.google.accompanist.insets)
 
     ksp(libs.androidx.room.compiler)
 
     //Glide
-    implementation (libs.com.github.bumptech.glide.glide)
-    annotationProcessor (libs.compiler)
-
+    implementation(libs.com.github.bumptech.glide.glide)
+    annotationProcessor(libs.compiler)
 
     // CameraX for live camera feed
-    implementation (libs.androidx.camera.camera2)
-    implementation (libs.androidx.camera.lifecycle)
-    implementation (libs.androidx.camera.view)
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.view)
     implementation(libs.androidx.room.ktx)
     // to set the status bar theme
-   // implementation (libs.accompanist.systemuicontroller) wrong version
+    // implementation (libs.accompanist.systemuicontroller) wrong version
 
     implementation(libs.wasabeef.richeditor.android)
 

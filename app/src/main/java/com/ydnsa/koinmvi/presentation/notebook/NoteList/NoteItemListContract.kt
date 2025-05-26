@@ -1,10 +1,12 @@
 package com.ydnsa.koinmvi.presentation.notebook.NoteList
 
+import com.ydnsa.koinmvi.data.local.*
+
 /**
  * UI State that represents NoteItemListScreen
  **/
 data class NoteItemListState(
-		val files : List<String> = emptyList<String>()
+        val noteItems : List<FileEntity> = emptyList<FileEntity>() ,
                             )
 
 /**
@@ -14,9 +16,8 @@ data class NoteItemListState(
 
 sealed interface NoteItemListAction
 {
-	data object OnClick : NoteItemListAction
-	data object OnCreate : NoteItemListAction
-    data object OnSaveNewFile: NoteItemListAction
-    data object OnBackButtonClick: NoteItemListAction
+    data object OnEdit : NoteItemListAction
+    data object OnCreate : NoteItemListAction
+
 }
 

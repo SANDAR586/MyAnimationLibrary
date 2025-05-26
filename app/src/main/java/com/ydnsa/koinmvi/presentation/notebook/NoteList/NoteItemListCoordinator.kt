@@ -8,31 +8,35 @@ import org.koin.androidx.compose.*
  * and one-shot actions based on the new UI state
  */
 class NoteItemListCoordinator(
-		val viewModel : NoteItemListViewModel ,
+        val viewModel : NoteItemListViewModel ,
                              )
 {
-	val screenStateFlow = viewModel.stateFlow
-	fun handle(action : NoteItemListAction)
-	{
-		when (action)
-		{
-			NoteItemListAction.OnClick           ->{}
-			NoteItemListAction.OnCreate          ->viewModel.createFolder()
-			NoteItemListAction.OnBackButtonClick -> TODO()
-			NoteItemListAction.OnSaveNewFile     -> TODO()
-		}
-	}
-	
+    val screenStateFlow = viewModel.stateFlow
+    fun handle(action : NoteItemListAction)
+    {
+        when (action)
+        {
+            NoteItemListAction.OnEdit   ->
+            {
+            }
+
+            NoteItemListAction.OnCreate ->
+            {
+            }
+
+        }
+    }
+
 }
 
 @Composable
 fun rememberNoteItemListCoordinator(
-		viewModel : NoteItemListViewModel = koinViewModel() ,
+        viewModel : NoteItemListViewModel = koinViewModel() ,
                                    ) : NoteItemListCoordinator
 {
-	return remember(viewModel) {
-		NoteItemListCoordinator(
-				viewModel = viewModel
-		                       )
-	}
+    return remember(viewModel) {
+        NoteItemListCoordinator(
+                viewModel = viewModel
+                               )
+    }
 }

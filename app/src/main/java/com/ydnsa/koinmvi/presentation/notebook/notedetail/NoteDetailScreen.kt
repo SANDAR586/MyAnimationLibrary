@@ -1,29 +1,33 @@
 package com.ydnsa.koinmvi.presentation.notebook.notedetail
 
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.runtime.*
+import androidx.compose.ui.tooling.preview.*
+import androidx.navigation.*
+import androidx.navigation.compose.*
+import com.ydnsa.koinmvi.presentation.notebook.notedetail.components.*
 
 @Composable
 fun NoteDetailScreen(
-		state : NoteDetailState ,
-		onAction : (NoteDetailAction) -> Unit
+    state : NoteDetailState ,
+    onAction : (NoteDetailAction) -> Unit ,
+    navHostController : NavHostController ,
                     )
 {
-	// TODO UI Rendering
+    NoteEditScreen(navHostController , onAction)
 }
 
 @Composable
 @Preview(name = "NoteDetail")
 private fun NoteDetailScreenPreview(
-		@PreviewParameter(NoteDetailStatePreviewParameterProvider::class)
-		state : NoteDetailState
+    @PreviewParameter(NoteDetailStatePreviewParameterProvider::class)
+    state : NoteDetailState ,
                                    )
 {
-	NoteDetailScreen(
-			state = state ,
-			onAction = {}
-	                )
+    NoteDetailScreen(
+        state = state ,
+        onAction = {} ,
+        navHostController = rememberNavController()
+                    )
 }
 
 /**
@@ -32,8 +36,8 @@ private fun NoteDetailScreenPreview(
  **/
 class NoteDetailStatePreviewParameterProvider : PreviewParameterProvider<NoteDetailState>
 {
-	override val values : Sequence<NoteDetailState>
-		get() = sequenceOf(
-				NoteDetailState() ,
-		                  )
+    override val values : Sequence<NoteDetailState>
+        get() = sequenceOf(
+            NoteDetailState() ,
+                          )
 }

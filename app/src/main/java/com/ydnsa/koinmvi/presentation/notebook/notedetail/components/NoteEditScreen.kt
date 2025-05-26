@@ -10,11 +10,12 @@ import androidx.navigation.*
 import androidx.navigation.compose.*
 import com.mohamedrejeb.richeditor.model.*
 import com.mohamedrejeb.richeditor.ui.material3.*
+import com.ydnsa.koinmvi.presentation.notebook.notedetail.*
 
 @Composable
 fun NoteEditScreen(
         navHostController : NavHostController ,
-        onAction : () -> Unit ,
+        onAction : (NoteDetailAction) -> Unit ,
                   )
 {
 
@@ -22,18 +23,21 @@ fun NoteEditScreen(
     Scaffold(
             topBar = {
                 Spacer(Modifier.size(50.dp))
-                //TitleBar({})
+                TitleBar(
+                        onAction = onAction ,
+                        richTextState = richTextState
+                        )
             } ,
             bottomBar = {
-                //ToolBar(modifier = Modifier.navigationBarsPadding() , richTextState)
+                ToolBar(modifier = Modifier.navigationBarsPadding() , richTextState)
             } ,
             ) { pad ->
         Column(modifier = Modifier.padding(pad)) {
             RichTextEditor(
                     richTextState ,
                     modifier = Modifier
-		                    .fillMaxWidth()
-		                    .weight(999f)
+                            .fillMaxWidth()
+                            .weight(999f)
                           )
             Spacer(modifier = Modifier.weight(1f))
         }

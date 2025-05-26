@@ -1,50 +1,37 @@
 package com.ydnsa.koinmvi.presentation.notebook.NoteList
 
-import android.annotation.*
-import android.os.*
 import androidx.lifecycle.*
+import com.ydnsa.koinmvi.data.local.*
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import java.io.*
 
 class NoteItemListViewModel(
-		val savedStateHandle : SavedStateHandle ,
+        val savedStateHandle : SavedStateHandle ,
+        val fileDao : FileDao ,
                            ) : ViewModel()
 {
-	val myfile : String = "my notes"
-	
-	private val _stateFlow : MutableStateFlow<NoteItemListState> =
-			MutableStateFlow(NoteItemListState())
-	
-	val stateFlow : StateFlow<NoteItemListState> = _stateFlow.asStateFlow()
-	
-	fun createFolder()
-	{
-		val rootDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
-		val directory = File(rootDir , myfile)
-		if (! directory.exists())
-		{
-			directory.mkdirs() // true
-		}
-		listFiles()
-	}
-	
-	@SuppressLint("SuspiciousIndentation")
-	fun listFiles()
-	{
-		val rootDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
-		val directory = File(rootDir , myfile)
-		if (directory.exists() && directory.isDirectory)
-		{
-			_stateFlow.update { current ->
-				current.copy(files = directory.list()?.toList() ?: emptyList())
-			}
-		}
-		else
-		{
-			_stateFlow.update { current ->
-				current.copy(files = directory.list()?.toList() ?: emptyList())
-			}
-		}
-	}
-	
+    init
+    {
+        listNotes()
+    }
+
+    private val _stateFlow : MutableStateFlow<NoteItemListState> =
+            MutableStateFlow(NoteItemListState())
+
+    val stateFlow : StateFlow<NoteItemListState> = _stateFlow.asStateFlow()
+
+    fun listNotes()
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+            val files = fileDao.getAllFiles()
+            withContext(Dispatchers.Main) {
+                _stateFlow.update { current ->
+                    current.copy(
+                            noteItems = files
+                                )
+                }
+            }
+        }
+    }
+
 }

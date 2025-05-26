@@ -12,65 +12,65 @@ import androidx.navigation.*
 import androidx.navigation.compose.*
 import com.ydnsa.koinmvi.navigations.*
 import com.ydnsa.koinmvi.presentation.cutom.*
-import com.ydnsa.koinmvi.presentation.notebook.NoteList.NoteItemListAction
-import com.ydnsa.koinmvi.presentation.notebook.NoteList.NoteItemListState
-import com.ydnsa.koinmvi.presentation.notebook.notedetail.components.NoteCardItem
+import com.ydnsa.koinmvi.presentation.notebook.NoteList.*
+import com.ydnsa.koinmvi.presentation.notebook.notedetail.components.*
+import com.ydnsa.koinmvi.util.*
 
 @Composable
 fun NoteItemListScreen(
-		state : NoteItemListState ,
-		onAction : (NoteItemListAction) -> Unit ,
-		navHostController : NavHostController
+        state : NoteItemListState ,
+        onAction : (NoteItemListAction) -> Unit ,
+        navHostController : NavHostController ,
                       )
 {
-	
-	LaunchedEffect(Unit) {
-		onAction(NoteItemListAction.OnCreate)
-	}
-	
-	Scaffold(
-			topBar = {
-				CustomTopBar(Modifier , "Note Book" , null)
-			} ,
-			
-			floatingActionButton = {
-				ElevatedButton(onClick = {
-					navHostController.navigate(Screen.NoteEdit.route)
-				}) {
-					Icon(
-							imageVector = Icons.Filled.Add ,
-							contentDescription = "Add"
-					    )
-				}
-			}
-	        ) { padding ->
-		LazyColumn(modifier = Modifier.padding(padding)) {
-			items(state.files.size) { file ->
-				NoteCardItem(
-						title = state.files[file] ,
-						contentPreview = "file data" ,
-						date = "12 June 2025" ,
-						onClick = {}
-				            )
-			}
-		}
-	}
-	
+
+    LaunchedEffect(Unit) {
+        onAction(NoteItemListAction.OnCreate)
+    }
+
+    Scaffold(
+            topBar = {
+                CustomTopBar(Modifier , "Note Book" , null)
+            } ,
+
+            floatingActionButton = {
+                ElevatedButton(onClick = {
+                    navHostController.navigate(Screen.NoteEdit.route)
+                }) {
+                    Icon(
+                            imageVector = Icons.Filled.Add ,
+                            contentDescription = "Add"
+                        )
+                }
+            }
+            ) { padding ->
+        LazyColumn(modifier = Modifier.padding(padding)) {
+            items(state.noteItems.size) { file ->
+                NoteCardItem(
+                        title = state.noteItems[file].title ,
+                        contentPreview = state.noteItems[file].content ,
+                        date = state.noteItems[file].timestamp.getDate() ,
+                        onClick = {}
+                            )
+            }
+        }
+    }
+
 }
 
 @Composable
 @Preview(name = "NoteItemList")
 private fun NoteItemListScreenPreview(
-		@PreviewParameter(NoteItemListStatePreviewParameterProvider::class)
-		state : NoteItemListState ,
+        @PreviewParameter(NoteItemListStatePreviewParameterProvider::class)
+        state : NoteItemListState ,
                                      )
 {
-	val navHostController = rememberNavController()
-	NoteItemListScreen(
-			state = state ,
-			onAction = {} ,
-			navHostController
-	                  )
+    val navHostController = rememberNavController()
+    NoteItemListScreen(
+            state = state ,
+            onAction = {} ,
+            navHostController
+                      )
 }
 
 /**
@@ -79,8 +79,8 @@ private fun NoteItemListScreenPreview(
  **/
 class NoteItemListStatePreviewParameterProvider : PreviewParameterProvider<NoteItemListState>
 {
-	override val values : Sequence<NoteItemListState>
-		get() = sequenceOf(
-				NoteItemListState() ,
-		                  )
+    override val values : Sequence<NoteItemListState>
+        get() = sequenceOf(
+                NoteItemListState() ,
+                          )
 }

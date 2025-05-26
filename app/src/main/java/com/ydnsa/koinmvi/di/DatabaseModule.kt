@@ -1,20 +1,20 @@
 package com.ydnsa.koinmvi.di
-import android.app.Application
-import androidx.room.Room
-import com.ydnsa.koinmvi.data.local.AppDatabase
-import org.koin.dsl.module
 
+import androidx.room.*
+import com.ydnsa.koinmvi.data.local.*
+import org.koin.dsl.*
 
-val databaseModule= module{
+val databaseModule = module {
 
     single {
-     val db=   Room.databaseBuilder(
-            get<Application>(),
-            AppDatabase::class.java , "mydb"
-        ).build()
+        Room.databaseBuilder(
+                get() ,
+                AppDatabase::class.java , "my db"
+                            ).build()
     }
 
-    single{
+    single {
         get<AppDatabase>().userDao()
     }
+    single { get<AppDatabase>().fileDao() }
 }

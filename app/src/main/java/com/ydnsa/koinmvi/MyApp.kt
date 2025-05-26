@@ -1,22 +1,22 @@
 package com.ydnsa.koinmvi
 
-import android.app.Application
-import com.ydnsa.koinmvi.MainActivity
-import com.ydnsa.koinmvi.di.appModule
-import com.ydnsa.koinmvi.di.databaseModule
-import com.ydnsa.koinmvi.di.gsonModule
-import com.ydnsa.koinmvi.di.moshiModule
-import org.koin.android.ext.koin.androidContext
-import org.koin.core.context.startKoin
+import android.app.*
+import com.ydnsa.koinmvi.di.*
+import org.koin.android.ext.koin.*
+import org.koin.core.context.*
+import org.koin.core.logger.*
 
-class MyApp : Application() {
+class MyApp : Application()
+{
 
-    override fun onCreate() {
+    override fun onCreate()
+    {
         super.onCreate()
-        val applicationModules=listOf(
-            appModule, moshiModule, gsonModule, databaseModule
-        )
+        val applicationModules = listOf(
+                moshiModule , gsonModule , databaseModule , appModule ,
+                                       )
         startKoin {
+            androidLogger(Level.ERROR) // Or Level.DEBUG
             androidContext(this@MyApp)
             modules(applicationModules)
         }

@@ -1,9 +1,13 @@
 package com.ydnsa.koinmvi.presentation.notebook.notedetail
 
+import com.ydnsa.koinmvi.data.local.*
+
 /**
  * UI State that represents NoteDetailScreen
  **/
-class NoteDetailState
+data class NoteDetailState(
+        val fileEntity : FileEntity? = null ,
+                          )
 
 /**
  * NoteDetail Actions emitted from the UI Layer
@@ -12,7 +16,7 @@ class NoteDetailState
 
 sealed interface NoteDetailAction
 {
-    data object OnSaveNewNote : NoteDetailAction
+    data class OnSaveNewNote(val htmlString : String , val title : String) : NoteDetailAction
     data object OnEditNote : NoteDetailAction
 }
 

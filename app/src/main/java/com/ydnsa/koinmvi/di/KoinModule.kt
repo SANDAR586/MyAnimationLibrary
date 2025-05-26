@@ -1,33 +1,32 @@
 package com.ydnsa.koinmvi.di
 
+import androidx.lifecycle.*
+import com.ydnsa.koinmvi.data.fake.*
+import com.ydnsa.koinmvi.data.local.*
+import com.ydnsa.koinmvi.data.network.repository.*
+import com.ydnsa.koinmvi.domain.usecase.*
+import com.ydnsa.koinmvi.presentation.home.*
+import com.ydnsa.koinmvi.presentation.login.*
+import com.ydnsa.koinmvi.presentation.notebook.NoteList.*
+import com.ydnsa.koinmvi.presentation.notebook.notedetail.*
+import org.koin.android.ext.koin.*
+import org.koin.androidx.viewmodel.dsl.*
+import org.koin.dsl.*
 
-import com.ydnsa.koinmvi.data.fake.FakeJsonReader
-import com.ydnsa.koinmvi.data.fake.LoginApi
-import com.ydnsa.koinmvi.data.local.DataStoreManager
-import com.ydnsa.koinmvi.data.network.repository.LoginRepository
-import com.ydnsa.koinmvi.data.network.repository.LoginRepositoryImpl
-import com.ydnsa.koinmvi.domain.usecase.LoginUseCase
-import com.ydnsa.koinmvi.presentation.home.HomeViewModel
-import com.ydnsa.koinmvi.presentation.login.LoginModelView
-import com.ydnsa.koinmvi.presentation.notebook.NoteList.NoteItemListViewModel
-import org.koin.android.ext.koin.androidContext
-import org.koin.dsl.module
-import org.koin.androidx.viewmodel.dsl.viewModel
-
-
-
-val appModule= module{
+val appModule = module {
     single { LoginApi() }
 
     single<LoginRepository> { LoginRepositoryImpl(get()) }
     single { DataStoreManager(androidContext()) }
     factory { LoginUseCase(get()) }
     factory { FakeJsonReader() }
-    viewModel{
-        LoginModelView(get<LoginUseCase>(),get<DataStoreManager>())
+    viewModel {
+        LoginModelView(get<LoginUseCase>() , get<DataStoreManager>())
     }
-    viewModel { HomeViewModel(get()) }
-    viewModel { NoteItemListViewModel(get()) }
-
+    viewModel { HomeViewModel(get<SavedStateHandle>()) }
+    viewModel { NoteItemListViewModel(get<SavedStateHandle>() , get<FileDao>()) }
+    viewModel { (handle : SavedStateHandle) ->
+        NoteDetailViewModel(handle , get<FileDao>())
+    }
 
 }
