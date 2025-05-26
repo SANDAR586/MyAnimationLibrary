@@ -6,11 +6,12 @@ import androidx.navigation.*
 
 @Composable
 fun NoteDetailRoute(
-        navHostController : NavHostController ,
+    navHostController : NavHostController ,
+    notedId : String
                    )
 {
     val coordinator : NoteDetailCoordinator =
-            rememberNoteDetailCoordinator()    // State observing and declarations
+        rememberNoteDetailCoordinator()    // State observing and declarations
     val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(NoteDetailState())
 
     // UI Actions
@@ -20,9 +21,10 @@ fun NoteDetailRoute(
 
     // UI Rendering
     NoteDetailScreen(
-            state = uiState ,
-            onAction = actionsHandler ,
-            navHostController
+        state = uiState ,
+        onAction = actionsHandler ,
+        navHostController ,
+        notedId
                     )
 }
 

@@ -22,11 +22,17 @@ fun AppNavGraph(navHostController : NavHostController)
         }
         composable(Screen.NotesItemList.route) {
             NoteItemListRoute(
-                    navHostController
+                navHostController
                              )
         }
-        composable(Screen.NoteEdit.route) {
-            NoteDetailRoute(navHostController)
+        composable(
+            route = "editNote/{noteId}" ,
+            arguments = listOf(navArgument("noteId") {
+                type = NavType.StringType
+            })
+                  ) { backStackEntry ->
+            val noteId = backStackEntry.arguments?.getString("noteId")
+            NoteDetailRoute(navHostController , noteId ?: "")
         }
     }
 

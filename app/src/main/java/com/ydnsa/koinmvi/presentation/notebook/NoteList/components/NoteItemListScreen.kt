@@ -18,9 +18,9 @@ import com.ydnsa.koinmvi.util.*
 
 @Composable
 fun NoteItemListScreen(
-        state : NoteItemListState ,
-        onAction : (NoteItemListAction) -> Unit ,
-        navHostController : NavHostController ,
+    state : NoteItemListState ,
+    onAction : (NoteItemListAction) -> Unit ,
+    navHostController : NavHostController ,
                       )
 {
 
@@ -29,28 +29,28 @@ fun NoteItemListScreen(
     }
 
     Scaffold(
-            topBar = {
-                CustomTopBar(Modifier , "Note Book" , null)
-            } ,
+        topBar = {
+            CustomTopBar(Modifier , "Note Book" , null)
+        } ,
 
-            floatingActionButton = {
-                ElevatedButton(onClick = {
-                    navHostController.navigate(Screen.NoteEdit.route)
-                }) {
-                    Icon(
-                            imageVector = Icons.Filled.Add ,
-                            contentDescription = "Add"
-                        )
-                }
+        floatingActionButton = {
+            ElevatedButton(onClick = {
+                navHostController.navigate(Screen.NoteEdit("empty").route)
+            }) {
+                Icon(
+                    imageVector = Icons.Filled.Add ,
+                    contentDescription = "Add"
+                    )
             }
+        }
             ) { padding ->
         LazyColumn(modifier = Modifier.padding(padding)) {
             items(state.noteItems.size) { file ->
                 NoteCardItem(
-                        title = state.noteItems[file].title ,
-                        contentPreview = state.noteItems[file].content ,
-                        date = state.noteItems[file].timestamp.getDate() ,
-                        onClick = {}
+                    title = state.noteItems[file].title ,
+                    contentPreview = state.noteItems[file].content ,
+                    date = state.noteItems[file].timestamp.getDate() ,
+                    onClick = {}
                             )
             }
         }
@@ -61,15 +61,15 @@ fun NoteItemListScreen(
 @Composable
 @Preview(name = "NoteItemList")
 private fun NoteItemListScreenPreview(
-        @PreviewParameter(NoteItemListStatePreviewParameterProvider::class)
-        state : NoteItemListState ,
+    @PreviewParameter(NoteItemListStatePreviewParameterProvider::class)
+    state : NoteItemListState ,
                                      )
 {
     val navHostController = rememberNavController()
     NoteItemListScreen(
-            state = state ,
-            onAction = {} ,
-            navHostController
+        state = state ,
+        onAction = {} ,
+        navHostController
                       )
 }
 
@@ -81,6 +81,6 @@ class NoteItemListStatePreviewParameterProvider : PreviewParameterProvider<NoteI
 {
     override val values : Sequence<NoteItemListState>
         get() = sequenceOf(
-                NoteItemListState() ,
+            NoteItemListState() ,
                           )
 }

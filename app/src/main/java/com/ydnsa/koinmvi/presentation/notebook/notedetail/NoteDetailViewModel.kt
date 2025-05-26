@@ -12,13 +12,19 @@ import java.time.*
 import java.time.format.*
 
 class NoteDetailViewModel(
-        val savedStateHandle : SavedStateHandle ,
-        val fileDao : FileDao ,
+    val savedStateHandle : SavedStateHandle ,
+    val fileDao : FileDao ,
                          ) : ViewModel()
 {
+    val noteId : String? = savedStateHandle["noteId"]
     val myfile : String = "my notes"
     private val _stateFlow : MutableStateFlow<NoteDetailState> = MutableStateFlow(NoteDetailState())
     val stateFlow : StateFlow<NoteDetailState> = _stateFlow.asStateFlow()
+
+    init
+    {
+        Log.d("noteId" , noteId ?: "empty")
+    }
 
     fun saveNewFiles(htmlString : String , title : String)
     {
@@ -42,8 +48,7 @@ class NoteDetailViewModel(
                     it.write(htmlString.toByteArray())
                 }
 
-            }
-            catch (e : Exception)
+            } catch (e : Exception)
             {
                 Log.e("Error" , e.message.toString())
             }
@@ -64,7 +69,7 @@ class NoteDetailViewModel(
     fun getFileLocation() : File
     {
         val rootDir =
-                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
         val filename = getTimestampFileName()
         return File("$rootDir/$myfile" , "$filename.html")
     }
@@ -72,7 +77,7 @@ class NoteDetailViewModel(
     fun getTimestampFileName() : String
     {
         val formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")
-                .withZone(ZoneId.systemDefault())
+            .withZone(ZoneId.systemDefault())
         return formatter.format(Instant.now())
     }
 
@@ -84,19 +89,18 @@ class NoteDetailViewModel(
         it.toString()
         val content = getContentfromHtml(htmlString)
         val fileEnity = FileEntity(
-                uid = filename.name ,
-                folderName = fileId ,
-                fileLocation = filename.path ,
-                title = title ,
-                content = content ,
-                timestamp = System.currentTimeMillis()
+            uid = filename.name ,
+            folderName = fileId ,
+            fileLocation = filename.path ,
+            title = title ,
+            content = content ,
+            timestamp = System.currentTimeMillis()
                                   )
 
         try
         {
             fileDao.insertFile(fileEnity)
-        }
-        catch (e : Exception)
+        } catch (e : Exception)
         {
             Log.e("Error" , e.message ?: e.toString())
         }
@@ -110,8 +114,7 @@ class NoteDetailViewModel(
         return if (words.size <= 5)
         {
             htmlString.trim()
-        }
-        else
+        } else
         {
             words.take(5).joinToString(" ")
         }

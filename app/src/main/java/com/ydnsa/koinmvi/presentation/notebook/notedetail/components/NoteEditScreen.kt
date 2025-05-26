@@ -14,30 +14,32 @@ import com.ydnsa.koinmvi.presentation.notebook.notedetail.*
 
 @Composable
 fun NoteEditScreen(
-        navHostController : NavHostController ,
-        onAction : (NoteDetailAction) -> Unit ,
+    state : NoteDetailState ,
+    onAction : (NoteDetailAction) -> Unit ,
+    navHostController : NavHostController ,
+    noteId : String
                   )
 {
 
     val richTextState = rememberRichTextState()
     Scaffold(
-            topBar = {
-                Spacer(Modifier.size(50.dp))
-                TitleBar(
-                        onAction = onAction ,
-                        richTextState = richTextState
-                        )
-            } ,
-            bottomBar = {
-                ToolBar(modifier = Modifier.navigationBarsPadding() , richTextState)
-            } ,
+        topBar = {
+            Spacer(Modifier.size(50.dp))
+            TitleBar(
+                onAction = onAction ,
+                richTextState = richTextState
+                    )
+        } ,
+        bottomBar = {
+            ToolBar(modifier = Modifier.navigationBarsPadding() , richTextState)
+        } ,
             ) { pad ->
         Column(modifier = Modifier.padding(pad)) {
             RichTextEditor(
-                    richTextState ,
-                    modifier = Modifier
-                            .fillMaxWidth()
-                            .weight(999f)
+                richTextState ,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(999f)
                           )
             Spacer(modifier = Modifier.weight(1f))
         }
