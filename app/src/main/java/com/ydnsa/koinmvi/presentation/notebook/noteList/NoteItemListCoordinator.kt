@@ -1,4 +1,4 @@
-package com.ydnsa.koinmvi.presentation.notebook.NoteList
+package com.ydnsa.koinmvi.presentation.notebook.noteList
 
 import androidx.compose.runtime.*
 import org.koin.androidx.compose.*
@@ -8,7 +8,7 @@ import org.koin.androidx.compose.*
  * and one-shot actions based on the new UI state
  */
 class NoteItemListCoordinator(
-        val viewModel : NoteItemListViewModel ,
+    val viewModel : NoteItemListViewModel ,
                              )
 {
     val screenStateFlow = viewModel.stateFlow
@@ -31,12 +31,12 @@ class NoteItemListCoordinator(
 
 @Composable
 fun rememberNoteItemListCoordinator(
-        viewModel : NoteItemListViewModel = koinViewModel() ,
+    viewModel : NoteItemListViewModel = koinViewModel() ,
                                    ) : NoteItemListCoordinator
 {
     return remember(viewModel) {
         NoteItemListCoordinator(
-                viewModel = viewModel
+            viewModel = viewModel
                                )
     }
 }

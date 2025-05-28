@@ -6,7 +6,8 @@ import com.ydnsa.koinmvi.data.local.*
  * UI State that represents NoteDetailScreen
  **/
 data class NoteDetailState(
-        val fileEntity : FileEntity? = null ,
+    val fileEntity : FileEntity? = null ,
+    val htmlString : String? = null
                           )
 
 /**

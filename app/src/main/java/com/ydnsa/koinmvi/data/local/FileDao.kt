@@ -11,4 +11,7 @@ interface FileDao
     @Query("Select * from FileEntity")
     fun getAllFiles() : List<FileEntity>
 
+    @Query("Select * from FileEntity WHERE uid Like :uid")
+    fun findByNameFile(uid : String) : FileEntity?
+
 }

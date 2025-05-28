@@ -17,11 +17,11 @@ fun NoteEditScreen(
     state : NoteDetailState ,
     onAction : (NoteDetailAction) -> Unit ,
     navHostController : NavHostController ,
-    noteId : String
+    noteId : String ,
+    richTextState : RichTextState
                   )
 {
 
-    val richTextState = rememberRichTextState()
     Scaffold(
         topBar = {
             Spacer(Modifier.size(50.dp))

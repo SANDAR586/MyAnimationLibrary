@@ -46,7 +46,13 @@ android {
     room {
         schemaDirectory("$projectDir/schemas")
     }
+
 }
+ksp {
+    arg("skipKspOnTest" , "true")
+}
+
+
 
 dependencies {
 
@@ -92,6 +98,7 @@ dependencies {
     implementation(libs.androidx.camera.lifecycle)
     implementation(libs.androidx.camera.view)
     implementation(libs.androidx.room.ktx)
+
     // to set the status bar theme
     // implementation (libs.accompanist.systemuicontroller) wrong version
 
@@ -99,12 +106,16 @@ dependencies {
 
     implementation(libs.coil.compose)
     implementation(libs.coil.gif)
-
     testImplementation(libs.junit)
+    testImplementation(libs.kotlin.test) // Or latest
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    testImplementation("org.mockito:mockito-core:5.18.0")
+    testImplementation("androidx.test:core:1.5.0")
+    testImplementation("org.robolectric:robolectric:4.11")
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    testImplementation(kotlin("test"))
 }

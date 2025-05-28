@@ -1,4 +1,4 @@
-package com.ydnsa.koinmvi.presentation.notebook.NoteList
+package com.ydnsa.koinmvi.presentation.notebook.noteList
 
 import com.ydnsa.koinmvi.data.local.*
 
@@ -6,7 +6,7 @@ import com.ydnsa.koinmvi.data.local.*
  * UI State that represents NoteItemListScreen
  **/
 data class NoteItemListState(
-        val noteItems : List<FileEntity> = emptyList<FileEntity>() ,
+    val noteItems : List<FileEntity> = emptyList<FileEntity>() ,
                             )
 
 /**

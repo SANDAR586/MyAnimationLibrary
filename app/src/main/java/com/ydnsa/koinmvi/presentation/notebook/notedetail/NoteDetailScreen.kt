@@ -4,6 +4,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.tooling.preview.*
 import androidx.navigation.*
 import androidx.navigation.compose.*
+import com.mohamedrejeb.richeditor.model.*
 import com.ydnsa.koinmvi.presentation.notebook.notedetail.components.*
 
 @Composable
@@ -14,7 +15,10 @@ fun NoteDetailScreen(
     noteId : String
                     )
 {
-    NoteEditScreen(state , onAction , navHostController , noteId)
+    val richTextState = rememberRichTextState()
+    richTextState.setHtml(state.htmlString ?: "")
+
+    NoteEditScreen(state , onAction , navHostController , noteId , richTextState)
 }
 
 @Composable

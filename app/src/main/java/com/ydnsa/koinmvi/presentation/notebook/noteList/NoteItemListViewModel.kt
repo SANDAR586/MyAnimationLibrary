@@ -1,4 +1,4 @@
-package com.ydnsa.koinmvi.presentation.notebook.NoteList
+package com.ydnsa.koinmvi.presentation.notebook.noteList
 
 import androidx.lifecycle.*
 import com.ydnsa.koinmvi.data.local.*
@@ -6,8 +6,8 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
 class NoteItemListViewModel(
-        val savedStateHandle : SavedStateHandle ,
-        val fileDao : FileDao ,
+    val savedStateHandle : SavedStateHandle ,
+    val fileDao : FileDao ,
                            ) : ViewModel()
 {
     init
@@ -16,7 +16,7 @@ class NoteItemListViewModel(
     }
 
     private val _stateFlow : MutableStateFlow<NoteItemListState> =
-            MutableStateFlow(NoteItemListState())
+        MutableStateFlow(NoteItemListState())
 
     val stateFlow : StateFlow<NoteItemListState> = _stateFlow.asStateFlow()
 
@@ -27,7 +27,7 @@ class NoteItemListViewModel(
             withContext(Dispatchers.Main) {
                 _stateFlow.update { current ->
                     current.copy(
-                            noteItems = files
+                        noteItems = files
                                 )
                 }
             }

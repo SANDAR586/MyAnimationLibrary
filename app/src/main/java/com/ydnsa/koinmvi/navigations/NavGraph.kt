@@ -5,7 +5,7 @@ import androidx.navigation.*
 import androidx.navigation.compose.*
 import com.ydnsa.koinmvi.presentation.home.*
 import com.ydnsa.koinmvi.presentation.login.*
-import com.ydnsa.koinmvi.presentation.notebook.NoteList.*
+import com.ydnsa.koinmvi.presentation.notebook.noteList.*
 import com.ydnsa.koinmvi.presentation.notebook.notedetail.*
 
 @Composable

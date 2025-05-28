@@ -1,4 +1,4 @@
-package com.ydnsa.koinmvi.presentation.notebook.NoteList.components
+package com.ydnsa.koinmvi.presentation.notebook.noteList.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
@@ -12,9 +12,8 @@ import androidx.navigation.*
 import androidx.navigation.compose.*
 import com.ydnsa.koinmvi.navigations.*
 import com.ydnsa.koinmvi.presentation.cutom.*
-import com.ydnsa.koinmvi.presentation.notebook.NoteList.*
+import com.ydnsa.koinmvi.presentation.notebook.noteList.*
 import com.ydnsa.koinmvi.presentation.notebook.notedetail.components.*
-import com.ydnsa.koinmvi.util.*
 
 @Composable
 fun NoteItemListScreen(
@@ -47,10 +46,10 @@ fun NoteItemListScreen(
         LazyColumn(modifier = Modifier.padding(padding)) {
             items(state.noteItems.size) { file ->
                 NoteCardItem(
-                    title = state.noteItems[file].title ,
-                    contentPreview = state.noteItems[file].content ,
-                    date = state.noteItems[file].timestamp.getDate() ,
-                    onClick = {}
+                    fileEntity = state.noteItems[file] ,
+                    onClick = {
+                        navHostController.navigate(Screen.NoteEdit(state.noteItems[file].uid).route)
+                    }
                             )
             }
         }

@@ -14,8 +14,10 @@ import java.time.format.*
 class NoteDetailViewModel(
     val savedStateHandle : SavedStateHandle ,
     val fileDao : FileDao ,
-                         ) : ViewModel()
+
+    ) : ViewModel()
 {
+
     val noteId : String? = savedStateHandle["noteId"]
     val myfile : String = "my notes"
     private val _stateFlow : MutableStateFlow<NoteDetailState> = MutableStateFlow(NoteDetailState())
@@ -23,7 +25,8 @@ class NoteDetailViewModel(
 
     init
     {
-        Log.d("noteId" , noteId ?: "empty")
+        Log.d("reading" , "view model created")
+        readFile()
     }
 
     fun saveNewFiles(htmlString : String , title : String)
@@ -53,6 +56,45 @@ class NoteDetailViewModel(
                 Log.e("Error" , e.message.toString())
             }
         }
+    }
+
+    fun readFile()
+    {
+        Log.d("reading" , "File reading")
+        var html : String? = null
+        viewModelScope.launch(Dispatchers.IO) {
+            Log.d("reading" , noteId ?: "empty")
+            if (noteId != "empty")
+            {
+                val fileEntity = fileDao.findByNameFile(noteId ?: "")
+                if (fileEntity != null)
+                {
+                    Log.d("reading" , fileEntity.uid)
+                    val rootDir =
+                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+                    val file = File("$rootDir/$myfile" , fileEntity.uid)
+                    Log.d("reading" , fileEntity.toString())
+                    if (file.exists())
+                    {
+                        html = file.readText()
+                        Log.d("reading" , html)
+                        _stateFlow.update { current ->
+                            current.copy(
+                                htmlString = html
+                                        )
+
+                        }
+
+                    } else
+                    {
+                        // File does not exist
+                        Log.e("FileCheck" , "File NOT found at: ${file.absolutePath}")
+                    }
+                }
+
+            }
+        }
+
     }
 
     fun createFolder()

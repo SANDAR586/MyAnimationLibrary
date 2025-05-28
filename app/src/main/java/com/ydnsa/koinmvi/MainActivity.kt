@@ -1,6 +1,8 @@
 package com.ydnsa.koinmvi
 
+import android.content.*
 import android.os.*
+import android.provider.*
 import androidx.activity.*
 import androidx.activity.compose.*
 import androidx.compose.foundation.*
@@ -22,6 +24,15 @@ class MainActivity : ComponentActivity()
     {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+        {
+            if (! Environment.isExternalStorageManager())
+            {
+                val intent = Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
+        }
 
         setContent {
 
