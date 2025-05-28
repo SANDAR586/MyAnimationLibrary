@@ -14,18 +14,17 @@ import com.ydnsa.koinmvi.navigations.*
 import com.ydnsa.koinmvi.presentation.cutom.*
 import com.ydnsa.koinmvi.presentation.notebook.noteList.*
 import com.ydnsa.koinmvi.presentation.notebook.notedetail.components.*
+import org.koin.androidx.compose.*
 
 @Composable
 fun NoteItemListScreen(
-    state : NoteItemListState ,
-    onAction : (NoteItemListAction) -> Unit ,
     navHostController : NavHostController ,
                       )
 {
+    val viewModel = koinViewModel<NoteItemListViewModel>()
+    val files by viewModel.allFiles.collectAsState(initial = emptyList())
 
-    LaunchedEffect(Unit) {
-        onAction(NoteItemListAction.OnCreate)
-    }
+
 
     Scaffold(
         topBar = {
@@ -44,11 +43,12 @@ fun NoteItemListScreen(
         }
             ) { padding ->
         LazyColumn(modifier = Modifier.padding(padding)) {
-            items(state.noteItems.size) { file ->
+            items(files) { file ->
                 NoteCardItem(
-                    fileEntity = state.noteItems[file] ,
+                    fileEntity = file ,
                     onClick = {
-                        navHostController.navigate(Screen.NoteEdit(state.noteItems[file].uid).route)
+                        //navigating to Edit Notes Screen
+                        navHostController.navigate(Screen.NoteEdit(file.uid).route)
                     }
                             )
             }
@@ -60,26 +60,12 @@ fun NoteItemListScreen(
 @Composable
 @Preview(name = "NoteItemList")
 private fun NoteItemListScreenPreview(
-    @PreviewParameter(NoteItemListStatePreviewParameterProvider::class)
-    state : NoteItemListState ,
+
                                      )
 {
     val navHostController = rememberNavController()
     NoteItemListScreen(
-        state = state ,
-        onAction = {} ,
         navHostController
                       )
 }
 
-/**
- * PreviewParameter Provider for NoteItemListScreen Preview
- * Add values to the sequence to see the preview in different states
- **/
-class NoteItemListStatePreviewParameterProvider : PreviewParameterProvider<NoteItemListState>
-{
-    override val values : Sequence<NoteItemListState>
-        get() = sequenceOf(
-            NoteItemListState() ,
-                          )
-}

@@ -2,7 +2,6 @@ package com.ydnsa.koinmvi
 
 import org.junit.*
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -16,13 +15,11 @@ class ExampleUnitTest
     {
         assertEquals(4 , 2 + 2)
     }
-}
 
-class EmailValidatorTest
-{
     @Test
-    fun emailValidator_CorrectEmailSimple_ReturnsTrue()
+    fun test_navigation()
     {
-        assertTrue("123" == "123")
+
     }
 }
+
