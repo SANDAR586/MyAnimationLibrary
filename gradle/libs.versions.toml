@@ -1,6 +1,5 @@
 [versions]
 accompanistInsetsVersion = "0.28.0"
-accompanistSystemuicontroller = "any"
 agp = "8.9.1"
 cameraCamera2 = "1.4.2"
 coilComposeVersion = "3.1.0"
@@ -8,10 +7,8 @@ datastorePreferencesVersion = "1.1.6"
 githubGlide = "4.16.0"
 gson = "2.13.0"
 koinAndroidxCompose = "4.0.4"
-#nav3Core = "1.0.0-alpha01"
-#nav3Material = "1.0.0-SNAPSHOT"
-#nav3Lifecycle = "1.0.0-alpha01"
 kotlinSerialization = "2.1.21"
+kotlinTestVersion = "1.9.22"
 kotlinxSerializationCore = "1.8.1"
 
 kotlin = "2.1.20"
@@ -33,13 +30,10 @@ tensorflowTensorflowLite = "2.13.0"
 richeditorAndroidVersion = "1.0.0-rc09"
 
 [libraries]
-#androidx-navigation3-runtime = { module = "androidx.navigation3:navigation3-runtime", version.ref = "nav3Core" }
-#androidx-navigation3-ui = { module = "androidx.navigation3:navigation3-ui", version.ref = "nav3Core" }
-#androidx-material3-navigation3 = { group = "androidx.compose.material3.adaptive", name = "adaptive-navigation3", version.ref = "nav3Material" }
-#androidx-lifecycle-viewmodel-navigation3 = { module = "androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "nav3Lifecycle" }
-#kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinxSerializationCore" }
+
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlinTestVersion" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationCore" }
-accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistSystemuicontroller" }
+
 androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "cameraCamera2" }
 androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "cameraCamera2" }
 androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "cameraCamera2" }

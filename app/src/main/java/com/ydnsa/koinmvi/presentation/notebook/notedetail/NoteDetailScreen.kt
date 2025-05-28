@@ -11,9 +11,11 @@ fun NoteDetailScreen(
     state : NoteDetailState ,
     onAction : (NoteDetailAction) -> Unit ,
     navHostController : NavHostController ,
+    noteId : String ,
+
                     )
 {
-    NoteEditScreen(navHostController , onAction)
+    NoteEditScreen(state , onAction , navHostController , noteId )
 }
 
 @Composable
@@ -23,10 +25,12 @@ private fun NoteDetailScreenPreview(
     state : NoteDetailState ,
                                    )
 {
+
     NoteDetailScreen(
         state = state ,
         onAction = {} ,
-        navHostController = rememberNavController()
+        navHostController = rememberNavController() ,
+        ""
                     )
 }
 
