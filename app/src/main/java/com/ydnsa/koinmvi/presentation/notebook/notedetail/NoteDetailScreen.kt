@@ -15,7 +15,6 @@ fun NoteDetailScreen(
 
                     )
 {
-
     NoteEditScreen(state , onAction , navHostController , noteId )
 }
 

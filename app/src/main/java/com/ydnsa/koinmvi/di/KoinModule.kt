@@ -22,6 +22,7 @@ val appModule = module {
 
     // New DSL for use case
     factoryOf(::LoginUseCase)
+    factoryOf(::LocalAccessHelper)
 
     // ViewModels using traditional viewModel { } syntax (still valid)
     viewModel { LoginModelView(get() , get()) }
@@ -35,6 +36,6 @@ val appModule = module {
     }
 
     viewModel { (handle : SavedStateHandle) ->
-        NoteDetailViewModel(handle , get())
+        NoteDetailViewModel(handle , get() , get<LocalAccessHelper>())
     }
 }

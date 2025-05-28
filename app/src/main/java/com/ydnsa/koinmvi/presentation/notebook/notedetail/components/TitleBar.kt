@@ -15,6 +15,8 @@ import androidx.navigation.compose.rememberNavController
 import com.mohamedrejeb.richeditor.model.*
 import com.ydnsa.koinmvi.presentation.notebook.notedetail.*
 import com.ydnsa.koinmvi.ui.theme.*
+import org.koin.androidx.compose.koinViewModel
+
 @Composable
 fun TitleBar(
     modifier: Modifier = Modifier,
@@ -24,6 +26,13 @@ fun TitleBar(
             ) {
     var showDialog by remember { mutableStateOf(false) }
     var title by remember { mutableStateOf("Untitled") }
+    val viewModel=koinViewModel<NoteDetailViewModel>()
+
+    LaunchedEffect(Unit) {
+   if( viewModel.noteId != "empty"){
+    title=viewModel.title.value
+   }
+    }
 
     Box(
         modifier

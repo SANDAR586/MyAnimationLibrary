@@ -7,7 +7,6 @@ import com.ydnsa.koinmvi.data.local.*
  **/
 data class NoteDetailState(
     val fileEntity : FileEntity? = null ,
-    val htmlString : String? = null
                           )
 
 /**
@@ -19,6 +18,7 @@ sealed interface NoteDetailAction
 {
     data class OnSaveNewNote(val htmlString : String , val title : String) : NoteDetailAction
     data object OnEditNote : NoteDetailAction
+
 }
 
 

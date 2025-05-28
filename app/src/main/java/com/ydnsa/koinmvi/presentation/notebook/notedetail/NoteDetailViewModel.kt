@@ -1,144 +1,70 @@
 package com.ydnsa.koinmvi.presentation.notebook.notedetail
 
-import android.os.*
-import android.text.*
 import android.util.*
 import androidx.lifecycle.*
 import com.ydnsa.koinmvi.data.local.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import java.io.*
-import java.time.*
-import java.time.format.*
 
 class NoteDetailViewModel(
     val savedStateHandle : SavedStateHandle ,
     val fileDao : FileDao ,
-
-    ) : ViewModel()
+    val localAccessHelper : LocalAccessHelper
+                         ) : ViewModel()
 {
 
     val noteId : String? = savedStateHandle["noteId"]
-    val myfile : String = "my notes"
+    private val _editor = MutableStateFlow("")
+    val contents : StateFlow<String> = _editor
+
+    private val _title = MutableStateFlow("")
+    val title : StateFlow<String> = _title
     private val _stateFlow : MutableStateFlow<NoteDetailState> = MutableStateFlow(NoteDetailState())
     val stateFlow : StateFlow<NoteDetailState> = _stateFlow.asStateFlow()
 
     init
     {
-        Log.d("reading" , "view model created")
         readFile()
+
     }
 
-    fun saveNewFiles(htmlString : String , title : String)
+    fun saveNewFiles(content : String , title : String)
     {
         viewModelScope.launch(Dispatchers.IO) {
-            createFolder()
-            val fileName = getFileLocation()
-            writeFile(htmlString , title , fileName)
-            addFileToRoom(htmlString , title , myfile , fileName)
-
-        }
-
-    }
-
-    fun writeFile(htmlString : String , title : String , testFile : File)
-    {
-        {
-            try
+            val file = localAccessHelper.writeFile(content)
+            if (file != null)
             {
-
-                FileOutputStream(testFile).use {
-                    it.write(htmlString.toByteArray())
-                }
-
-            } catch (e : Exception)
-            {
-                Log.e("Error" , e.message.toString())
+                addFileToRoom(file , content , title)
             }
         }
     }
 
     fun readFile()
     {
-        Log.d("reading" , "File reading")
-        var html : String? = null
         viewModelScope.launch(Dispatchers.IO) {
-            Log.d("reading" , noteId ?: "empty")
-            if (noteId != "empty")
+            if (noteId != null && noteId != "empty" && noteId.isNotBlank())
             {
-                val fileEntity = fileDao.findByNameFile(noteId ?: "")
+                val fileEntity = fileDao.findByNameFile(noteId)
                 if (fileEntity != null)
                 {
-                    Log.d("reading" , fileEntity.uid)
-                    val rootDir =
-                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
-                    val file = File("$rootDir/$myfile" , fileEntity.uid)
-                    Log.d("reading" , fileEntity.toString())
-                    if (file.exists())
-                    {
-                        html = file.readText()
-                        Log.d("reading" , html)
-                        _stateFlow.update { current ->
-                            current.copy(
-                                htmlString = html
-                                        )
-
-                        }
-
-                    } else
-                    {
-                        // File does not exist
-                        Log.e("FileCheck" , "File NOT found at: ${file.absolutePath}")
-                    }
+                    _title.value=fileEntity.title
+                    _editor.value = localAccessHelper.readFile(fileEntity)
                 }
-
             }
         }
-
     }
 
-    fun createFolder()
+    fun addFileToRoom(filename : File , content : String , title : String)
     {
-        val rootDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
-        val directory = File(rootDir , myfile)
-        if (! directory.exists())
-        {
-            directory.mkdirs() // true
-        }
-
-    }
-
-    fun getFileLocation() : File
-    {
-        val rootDir =
-            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
-        val filename = getTimestampFileName()
-        return File("$rootDir/$myfile" , "$filename.html")
-    }
-
-    fun getTimestampFileName() : String
-    {
-        val formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")
-            .withZone(ZoneId.systemDefault())
-        return formatter.format(Instant.now())
-    }
-
-    fun addFileToRoom(htmlString : String , title : String , fileId : String , filename : File)
-    {
-        val formatter = DateTimeFormatter.ofPattern("dd MMM yyyy").withZone(ZoneId.systemDefault())
-        formatter.format(Instant.now())
-        val it = Instant.now()
-        it.toString()
-        val content = getContentfromHtml(htmlString)
         val fileEnity = FileEntity(
             uid = filename.name ,
-            folderName = fileId ,
+            folderName = "" ,
             fileLocation = filename.path ,
             title = title ,
-            content = content ,
+            content = localAccessHelper.getDisplayContent(content) ,
             timestamp = System.currentTimeMillis()
                                   )
-
         try
         {
             fileDao.insertFile(fileEnity)
@@ -149,16 +75,4 @@ class NoteDetailViewModel(
 
     }
 
-    fun getContentfromHtml(htmlString : String) : String
-    {
-        val content = Html.fromHtml(htmlString , Html.FROM_HTML_MODE_LEGACY)
-        val words = content.trim().split("\\s+".toRegex())
-        return if (words.size <= 5)
-        {
-            htmlString.trim()
-        } else
-        {
-            words.take(5).joinToString(" ")
-        }
-    }
 }

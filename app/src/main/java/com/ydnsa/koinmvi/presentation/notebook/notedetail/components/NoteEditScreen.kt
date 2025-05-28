@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.*
 import androidx.compose.ui.tooling.preview.*
@@ -16,6 +15,7 @@ import com.mohamedrejeb.richeditor.ui.material3.*
 import com.ydnsa.koinmvi.presentation.notebook.notedetail.*
 import com.ydnsa.koinmvi.ui.theme.AppTheme
 import org.koin.androidx.compose.koinViewModel
+import androidx.compose.runtime.collectAsState
 
 @Composable
 fun NoteEditScreen(
@@ -27,15 +27,15 @@ fun NoteEditScreen(
     )
 {
     val richTextState = rememberRichTextState()
-
+    val viewModel=koinViewModel<NoteDetailViewModel>()
+    val item= viewModel.contents.collectAsState()
 
     LaunchedEffect(Unit) {
-
-        if (state.htmlString != null && state.htmlString.isNotBlank())
-        {
-            richTextState.setHtml(state.htmlString)
+        if(item.value.isNotBlank()){
+            richTextState.setHtml(item.value)
         }
     }
+
 
     Scaffold(
         topBar = {

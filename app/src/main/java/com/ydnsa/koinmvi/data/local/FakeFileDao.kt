@@ -1,9 +1,11 @@
 package com.ydnsa.koinmvi.data.local
 
+import kotlinx.coroutines.flow.*
+
 class FakeFileDao : FileDao
 {
     private val files = mutableListOf<FileEntity>()
-    val fakeFileEntities = listOf(
+    val fake2FileEntities = listOf(
         FileEntity(
             uid = "file1" ,
             folderName = "Notes" ,
@@ -28,20 +30,21 @@ class FakeFileDao : FileDao
             content = "<html>Journal entry</html>" ,
             timestamp = 1687776000000L // 26 Jun 2023
                   )
-                                 )
+                                  )
+    val fakeFileEntities = flowOf(fake2FileEntities)
 
     override fun insertFile(vararg fileEntity : FileEntity)
     {
-        files.addAll(fakeFileEntities)
+        files.addAll(fake2FileEntities)
     }
 
-    override fun getAllFiles() : List<FileEntity>
+    override fun getAllFiles() : Flow<List<FileEntity>>
     {
         return fakeFileEntities
     }
 
     override fun findByNameFile(uid : String) : FileEntity?
     {
-        return fakeFileEntities[1]
+        return fake2FileEntities[1]
     }
 }

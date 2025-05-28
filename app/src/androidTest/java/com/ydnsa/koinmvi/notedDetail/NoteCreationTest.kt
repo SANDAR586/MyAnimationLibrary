@@ -6,6 +6,7 @@ import androidx.lifecycle.*
 import androidx.navigation.compose.*
 import androidx.test.ext.junit.runners.*
 import com.ydnsa.koinmvi.data.local.*
+import com.ydnsa.koinmvi.presentation.notebook.noteList.*
 import com.ydnsa.koinmvi.presentation.notebook.notedetail.*
 import kotlinx.coroutines.*
 import org.junit.*
@@ -41,5 +42,23 @@ class NoteCreationTest
             .performTextInput("Hello World, The test is tested using Integration testing")
         composeTestRule.onNodeWithTag("save_new_note").performClick()
 
+    }
+
+    @Test
+    fun view_note_list()
+    {
+        val saveStateHandle = SavedStateHandle()
+        val fileDao = FakeFileDao()
+
+        val viewModel = NoteItemListViewModel(
+            savedStateHandle = saveStateHandle , fileDao
+                                             )
+
+        composeTestRule.setContent {
+            NoteItemListRoute(
+                navHostController = rememberNavController() ,
+                viewModel
+                             )
+        }
     }
 }
