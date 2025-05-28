@@ -23,9 +23,6 @@ fun NoteItemListScreen(
 {
     val viewModel = koinViewModel<NoteItemListViewModel>()
     val files by viewModel.allFiles.collectAsState(initial = emptyList())
-
-
-
     Scaffold(
         topBar = {
             CustomTopBar(Modifier , "Note Book" , null)
